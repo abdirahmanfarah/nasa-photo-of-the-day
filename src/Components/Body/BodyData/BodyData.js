@@ -2,6 +2,7 @@ import React, {useState, useEffect} from "react";
 // import ReactDOM from "react-dom";
 import axios from "axios";
 import NasaCard from "./BodyDataButton"
+import "../../../App.css";
 
 export default function NasaPicture() {
   const [nasa, setNasa ] = useState([])
@@ -21,10 +22,11 @@ export default function NasaPicture() {
 
 
   return (
-    <div className = "container">
+    <div className = "container-image">
       
-         <img src = {nasa.hdurl} />
-        
+         <img className = "img-source" src = {nasa.hdurl} />
+         <h2 className = "date">{nasa.date}</h2>
+         <p className = "Explanation"> {nasa.explanation}</p>
       
 
     </div>
