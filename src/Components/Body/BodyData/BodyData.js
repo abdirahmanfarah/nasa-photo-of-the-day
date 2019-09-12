@@ -22,13 +22,20 @@ const Description = styled.p`
   margin:auto;
   color:black;
 `;
+const DateButton = styled.button`
+  padding:50px;
+  margin:
+`;
 
 export default function NasaPicture() {
-  const [nasa, setNasa ] = useState([])
+  const [nasa, setNasa ] = useState([]);
+  const [date, setDate] = useState([]);
+
+
   
   useEffect(() => {
     axios
-      .get(`https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&date=2011-09-01`)
+      .get(`https://api.nasa.gov/planetary/apod?api_key=olBYwidSzG1KBoxDgoUcPMhX2R0QfW7aMxVkyl7X`)
         .then(response => {
           const nasa = response.data;
           console.log(nasa);
@@ -37,7 +44,7 @@ export default function NasaPicture() {
         .catch(error => {
           console.log("Sorry, no images being displayed");
         });
-  }, []); 
+  }, [date]); 
 
 
   return (
@@ -46,8 +53,9 @@ export default function NasaPicture() {
          <Date>{nasa.date}</Date>
          <img className = "img-source" src = {nasa.url} />
          <Description> {nasa.explanation}</Description>
+         <DateButton onClick={() => setDate(nasa.date)}>Random Date</DateButton>
       
 
     </Container>
-  )
+  );
 }
