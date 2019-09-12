@@ -1,13 +1,20 @@
 import React from "react";
+import styled from "styled-components";
+
+const Card = styled.div `
+  margin: auto;
+  backround: teal;
+
+`;
 
 
 const NasaCard = props => {
 
   return (
-    <div className = "nasa-card">
-      <img className = "nasa-image" alt = "nasa image" src ={props.hdurl} />
+    <Card>
+      <img className = "nasa-image" alt = "nasa image" src ={props.url} />
 
-    </div>
+    </Card>
 
   )
 }
