@@ -13,7 +13,7 @@ const Container = styled.div `
   padding:20px;
 `;
 
-const Date = styled.h2`
+const DateStyle = styled.h2`
   color:BEIGE;
 `;
 
@@ -24,18 +24,21 @@ const Description = styled.p`
 `;
 const DateButton = styled.button`
   padding:50px;
-  margin:
 `;
 
 export default function NasaPicture() {
   const [nasa, setNasa ] = useState([]);
-  const [date, setDate] = useState([]);
+  const [date, setDate] = useState(new Date());
 
+
+  let dd = date.getDate();
+  let mm = date.getMonth()+1;
+  let yyyy = date.getFullYear();
 
   
   useEffect(() => {
     axios
-      .get(`https://api.nasa.gov/planetary/apod?api_key=olBYwidSzG1KBoxDgoUcPMhX2R0QfW7aMxVkyl7X`)
+      .get(`https://api.nasa.gov/planetary/apod?api_key=olBYwidSzG1KBoxDgoUcPMhX2R0QfW7aMxVkyl7X&date=${yyyy}-${mm}-${dd}`)
         .then(response => {
           const nasa = response.data;
           console.log(nasa);
@@ -44,16 +47,16 @@ export default function NasaPicture() {
         .catch(error => {
           console.log("Sorry, no images being displayed");
         });
-  }, [date]); 
+  }, [dd, mm, yyyy]); 
 
 
   return (
     <Container>
       
-         <Date>{nasa.date}</Date>
+         <DateStyle>{nasa.date}</DateStyle>
          <img className = "img-source" src = {nasa.url} />
          <Description> {nasa.explanation}</Description>
-         <DateButton onClick={() => setDate(nasa.date)}>Random Date</DateButton>
+         <DateButton onClick={() => setDate({date})}>Random Date</DateButton>
       
 
     </Container>
